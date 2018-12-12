@@ -2,6 +2,7 @@
 
 var url = require("url"),
   https = require("https"),
+  http = require("http"),
   crypto = require("crypto"),
   defaultValidateUrl = true,
   defaultEncoding = "utf8",
@@ -106,7 +107,11 @@ var getCertificate = function(certUrl, cb) {
     return;
   }
 
-  https
+  // For easier offline testing, in combination
+  // with disabling URL verification.
+  var client = /^https/.test(certUrl) ? https : http;
+
+  client
     .get(certUrl, function(res) {
       var chunks = [];
 
