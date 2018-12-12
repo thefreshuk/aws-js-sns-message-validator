@@ -182,7 +182,8 @@ var validateSignature = function(message, cb, encoding) {
 function MessageValidator(hostPattern, encoding, validateUrl) {
   this.hostPattern = hostPattern || defaultHostPattern;
   this.encoding = encoding || defaultEncoding;
-  this.validateUrl = validateUrl || defaultValidateUrl;
+  this.validateUrl =
+    validateUrl === undefined ? defaultValidateUrl : validateUrl;
 }
 
 /**
